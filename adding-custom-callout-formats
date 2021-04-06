@@ -1,0 +1,40 @@
+<style>
+
+.callout.example {
+	border-left-color: #E3DBCC;
+	background-color: #FDF4E3;
+}
+
+.callout.example:before {
+	/*Bootstrap award icon (MIT License); converted with https://base64.guru/converter/encode/image/svg */	
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktYXdhcmQiIHZpZXdCb3g9IjAgMCAxNiAxNiI+CiAgPHBhdGggZD0iTTkuNjY5Ljg2NCA4IDAgNi4zMzEuODY0bC0xLjg1OC4yODItLjg0MiAxLjY4LTEuMzM3IDEuMzJMMi42IDZsLS4zMDYgMS44NTQgMS4zMzcgMS4zMi44NDIgMS42OCAxLjg1OC4yODJMOCAxMmwxLjY2OS0uODY0IDEuODU4LS4yODIuODQyLTEuNjggMS4zMzctMS4zMkwxMy40IDZsLjMwNi0xLjg1NC0xLjMzNy0xLjMyLS44NDItMS42OEw5LjY2OS44NjR6bTEuMTk2IDEuMTkzLjY4NCAxLjM2NSAxLjA4NiAxLjA3MkwxMi4zODcgNmwuMjQ4IDEuNTA2LTEuMDg2IDEuMDcyLS42ODQgMS4zNjUtMS41MS4yMjlMOCAxMC44NzRsLTEuMzU1LS43MDItMS41MS0uMjI5LS42ODQtMS4zNjUtMS4wODYtMS4wNzJMMy42MTQgNmwtLjI1LTEuNTA2IDEuMDg3LTEuMDcyLjY4NC0xLjM2NSAxLjUxLS4yMjlMOCAxLjEyNmwxLjM1Ni43MDIgMS41MDkuMjI5eiIvPgogIDxwYXRoIGQ9Ik00IDExLjc5NFYxNmw0LTEgNCAxdi00LjIwNmwtMi4wMTguMzA2TDggMTMuMTI2IDYuMDE4IDEyLjEgNCAxMS43OTR6Ii8+Cjwvc3ZnPg==");
+}
+
+</style>
+
+<script>
+
+	let customCallouts = [
+		// The class attribute has to match the class name above.
+		{title: "Example", class: "example"},
+	];
+
+	window.addEventListener('editor-tinymce::pre-init', event => {
+		customCallouts.forEach((singleCustomCallout) => {
+			// the array index is hard coded. If the index of the callouts moves this won't work anymore!
+			event.detail.config.style_formats[8].items.push({
+			title: singleCustomCallout.title, 
+			format: "callout" + singleCustomCallout.class
+		});
+		
+		event.detail.config.formats["callout" + singleCustomCallout.class] = {
+			attributes: { class: "callout " + singleCustomCallout.class },
+			block: "p",
+			exact: true,
+			deep: true,
+			split: true,
+		};
+		});
+
+	});
+</script>
